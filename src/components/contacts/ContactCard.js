@@ -23,7 +23,7 @@ const ContactCard = ({
         </ContactInfo>
       </InfoWrapper>
       <ButtonWrapper>
-        <Button>X</Button>
+        <Button variant="secondary">X</Button>{" "}
       </ButtonWrapper>
     </Card>
   );
@@ -48,7 +48,6 @@ const Avatar = styled.img`
   border-radius: 50%;
   height: 100px;
   width: auto;
-  position: relative;
   margin-left: 15px;
 `;
 
