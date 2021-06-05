@@ -17,7 +17,7 @@ const LoginPage = (props) => {
 };
 
 const Wrapper = styled.div`
-  background-color: lightgrey;
+  background-color: #ddd;
   height: 500px;
   display: flex;
   flex-direction: column;

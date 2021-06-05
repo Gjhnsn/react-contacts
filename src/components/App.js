@@ -5,7 +5,6 @@ import ContactsPage from "./contacts";
 import ContactDetailsPage from "./contact-details";
 import ContactCreatePage from "./contact-create";
 import { getContacts } from "../utils/contacts";
-import Playground from "../Playground";
 
 const mockContacts = [
   {

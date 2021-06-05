@@ -1,61 +1,80 @@
-import React from 'react';
+import { useState } from "react";
+import styled from "styled-components";
 
-class RegisterForm extends React.Component {
+export const RegisterForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    constructor(props) {
-        super(props);
+  function handleSubmission(e) {
+    e.preventDefault();
+    console.log("Submitted: ', e");
+  }
 
-        this.state = {
-            username: '',
-            password: '',
-        }
+  return (
+    <FormBox onSubmit={handleSubmission}>
+      <InputWrapper>
+        <label htmlFor="username"></label>
+        <Input
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <label htmlFor="password"></label>
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </InputWrapper>
+      <ButtonWrapper>
+        <RegisterButton type="submit">Register</RegisterButton>
+      </ButtonWrapper>
+    </FormBox>
+  );
+};
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    }
+const FormBox = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-    handleInputChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+const Input = styled.input`
+  border: none;
+  border-bottom: 1.5px solid black;
+  font-size: 1rem;
+  padding: 2px;
+  width: 300px;
+`;
 
-    handleFormSubmit(event) {
-        event.preventDefault();
-        
-    }
+const InputWrapper = styled.div`
+  padding: 8px;
+`;
 
-    render() {
-        return (
-            <form onSubmit={this.handleFormSubmit}>
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input 
-                        id="username"
-                        name="username"
-                        type="text" 
-                        placeholder="Username"  
-                        value={this.state.username}
-                        onChange={this.handleInputChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input 
-                        id="password"
-                        name="password"
-                        type="password" 
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                    />
-                </div>
-                <div>
-                    <button type="submit">Login</button>
-                </div>
-            </form>
-        )
-    }
-}
+const ButtonWrapper = styled.div`
+  margin: 15px 0 20px 0;
+`;
+
+const RegisterButton = styled.button`
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  background-color: #bbb;
+  border: none;
+  box-shadow: 0px 3px 8px #aaa;
+  font-weight: 500;
+  &:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+`;
 
 export default RegisterForm;

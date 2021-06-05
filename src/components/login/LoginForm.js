@@ -67,10 +67,14 @@ const LoginButton = styled.button`
   text-transform: uppercase;
   font-size: 1.1rem;
   padding: 10px 20px;
-  background-color: #ccc;
+  background-color: #bbb;
   border: none;
   box-shadow: 0px 3px 8px #aaa;
   font-weight: 500;
+  &:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
 `;
 
 export default LoginForm;
