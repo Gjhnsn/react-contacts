@@ -37,7 +37,7 @@ const ContactDetailsCard = ({ contact }) => {
 const Wrapper = styled.div`
   background-color: white;
   width: 550px;
-  padding: 25px;
+  padding: 30px 20px 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,15 +59,21 @@ const Name = styled.p`
 
 const DataWrapper = styled.div`
   width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const DataTitle = styled.dt`
-  padding-bottom: 5px;
+  margin-bottom: 5px;
+  font-size: 0.8rem;
 `;
 
 const Data = styled.dd`
   display: flex;
   justify-content: center;
+  color: #555;
+  margin-bottom: 12px;
 `;
 
 export default ContactDetailsCard;
