@@ -1,5 +1,6 @@
 import ContactCard from "./ContactCard";
 import styled from "styled-components";
+import Context from "./Context";
 
 const ContactList = ({ contacts = [] }) => {
   return (
