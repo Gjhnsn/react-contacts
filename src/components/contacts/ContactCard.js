@@ -5,6 +5,7 @@ const ContactCard = ({
   lastName = "",
   phoneNumber = "",
   profilePic = "",
+  onRemove,
 }) => {
   return (
     <Card>
@@ -23,7 +24,9 @@ const ContactCard = ({
         </ContactInfo>
       </InfoWrapper>
       <ButtonWrapper>
-        <Button variant="secondary">X</Button>{" "}
+        <Button variant="secondary" onClick={onRemove}>
+          X
+        </Button>{" "}
       </ButtonWrapper>
     </Card>
   );

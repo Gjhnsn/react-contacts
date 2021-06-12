@@ -1,8 +1,10 @@
 import ContactCard from "./ContactCard";
 import styled from "styled-components";
-import Context from "./Context";
+import { useContext } from "react";
+import { ContactContext } from "../../contexts/Context";
 
-const ContactList = ({ contacts = [] }) => {
+const ContactList = () => {
+  const { contacts, removeContact } = useContext(ContactContext);
   return (
     <ContactsList>
       {contacts.map((contact) => (
@@ -12,6 +14,7 @@ const ContactList = ({ contacts = [] }) => {
           lastName={contact.lastName}
           phoneNumber={contact.phoneNumber}
           profilePic={contact.profilePic}
+          onRemove={() => removeContact(contact.id)}
         />
       ))}
     </ContactsList>

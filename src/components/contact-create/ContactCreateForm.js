@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { ContactContext } from "../../contexts/Context";
 
 export const ContactCreateForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -9,9 +10,18 @@ export const ContactCreateForm = () => {
   const [address, setAddress] = useState("");
   const [profilePic, setProfilePic] = useState("");
 
+  const { createNewContact } = useContext(ContactContext);
+
   function handleSubmission(e) {
     e.preventDefault();
-    console.log("Submitted ',e");
+    createNewContact({
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      address,
+      profilePic,
+    });
   }
 
   return (

@@ -1,78 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import LoginPage from "./login";
 import RegisterPage from "./register";
 import ContactsPage from "./contacts";
 import ContactDetailsPage from "./contact-details";
 import ContactCreatePage from "./contact-create";
-import { getContacts } from "../utils/contacts";
+import { addContact, deleteContact, getContacts } from "../utils/contacts";
+import { getMockContacts } from "../utils/getMockContacts";
+import { ContactContext } from "../contexts/Context";
 
-const mockContacts = [
-  {
-    id: 1,
-    firstName: "Culley",
-    lastName: "Snelman",
-    profilePic: "https://i.pravatar.cc/300?u=1",
-    phoneNumber: "351-346-6140",
-    email: "csnelman0@blog.com",
-    address: "09 Eggendart Parkway",
-  },
-  {
-    id: 2,
-    firstName: "Tammara",
-    lastName: "Allcorn",
-    profilePic: "https://i.pravatar.cc/300?u=2",
-    phoneNumber: "676-783-9239",
-    email: "tallcorn1@senate.gov",
-    address: "78145 Brentwood Court",
-  },
-  {
-    id: 3,
-    firstName: "Cassandry",
-    lastName: "Roze",
-    profilePic: "https://i.pravatar.cc/300?u=3",
-    phoneNumber: "223-879-6692",
-    email: "croze2@w3.org",
-    address: "2079 Morrow Parkway",
-  },
-  {
-    id: 4,
-    firstName: "Koressa",
-    lastName: "Galey",
-    profilePic: "https://i.pravatar.cc/300?u=4",
-    phoneNumber: "761-858-5580",
-    email: "kgaley3@economist.com",
-    address: "5 Hanover Alley",
-  },
-];
+const App = () => {
+  const [contacts, setContacts] = useState([]);
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      contacts: [],
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const storedContacts = getContacts();
+    setContacts(storedContacts.length ? storedContacts : getMockContacts);
+  }, []);
 
-    this.setState({
-      contacts: storedContacts.length ? storedContacts : mockContacts,
-    });
-  }
+  const createNewContact = (contact) => {
+    const newContact = addContact(contacts);
+    setContacts([newContact, ...contacts]);
+  };
 
-  render() {
-    return (
-      <div>
-        <LoginPage />
-        <RegisterPage />
-        <ContactsPage contacts={this.state.contacts} />
-        <ContactDetailsPage contact={this.state.contacts[0]} />
-        <ContactCreatePage />
-      </div>
-    );
-  }
-}
+  const removeContact = (contactId) => {
+    const newContacts = contacts.filter((contact) => contact.id !== contactId);
+    deleteContact(contactId);
+    setContacts(newContacts);
+  };
+
+  return (
+    <ContactContext.Provider
+      value={{ createNewContact, removeContact, contacts }}
+    >
+      <LoginPage />
+      <RegisterPage />
+      <ContactsPage contacts={contacts} />
+      <ContactDetailsPage contact={contacts[0]} />
+      <ContactCreatePage />
+    </ContactContext.Provider>
+  );
+};
 
 export default App;
